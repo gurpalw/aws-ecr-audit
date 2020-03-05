@@ -1,2 +1,3 @@
 # aws-ecr-audit
-Counts images per repo.
+This script counts the number of images per ECR repo.
+
