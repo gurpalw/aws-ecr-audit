@@ -5,7 +5,6 @@ paginator = client.get_paginator('describe_repositories')
 response_iterator = paginator.paginate()
 
 repoNames = []
-sha = []
 maxResults = 1000
 
 
@@ -19,10 +18,14 @@ def getRepos():
 
 
 def listImages():
-    for repo in repoNames:  # Iterate over every repo we found earlier, and call list_images from boto3.
-        images = client.list_images(repositoryName=repo, maxResults=maxResults)  # List the images for a repo.
+    # Iterate over every repo we found earlier.
+    for repo in repoNames:
+        # List the images for a repo.
+        images = client.list_images(repositoryName=repo, maxResults=maxResults)
         imagesCount = []
         sha = []
+
+        # For every imageIds, find unique images only.
 
         for d in images['imageIds']:
             if d['imageDigest'] not in sha:
